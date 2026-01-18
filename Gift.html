@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Deepthi 💖</title>
+
+<style>
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ffdee9, #b5fffc);
+  min-height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Floating Background */
+.float {
+  position: absolute;
+  bottom: -60px;
+  animation: float 6s linear infinite;
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 1;
+}
+.heart { font-size: 22px; }
+.rose { font-size: 24px; }
+
+.balloon {
+  width: 30px;
+  height: 40px;
+  border-radius: 50% 50% 45% 45%;
+  position: absolute;
+}
+.balloon::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  width: 2px;
+  height: 15px;
+  background: #fff;
+  transform: translateX(-50%);
+}
+
+@keyframes float {
+  to { transform: translateY(-120vh); }
+}
+
+/* Card */
+.container {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 450px;
+  text-align: center;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  z-index: 2;
+}
+
+h1 { color: #ff4d6d; }
+
+.name {
+  font-size: 26px;
+  font-weight: bold;
+  animation: glow 2s infinite alternate;
+}
+@keyframes glow {
+  from { color: #ff4d6d; }
+  to { color: #ff85a1; }
+}
+
+.question { font-size: 18px; margin: 20px 0; }
+
+input {
+  padding: 10px;
+  width: 80%;
+  border-radius: 10px;
+  border: 2px solid #ddd;
+  outline: none;
+  font-size: 16px;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px 25px;
+  border: none;
+  background: #ff4d6d;
+  color: white;
+  font-size: 16px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+button:hover { background: #e63b5c; }
+
+.message { margin-top: 10px; font-weight: bold; }
+
+/* Letters */
+.letters {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+  gap: 8px;
+}
+.box {
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  background: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+.revealed {
+  background: #ff4d6d;
+  color: white;
+  animation: pop 0.3s ease;
+}
+@keyframes pop {
+  0% { transform: scale(0.5); }
+  100% { transform: scale(1); }
+}
+
+/* Intro & Final */
+#quiz, #final { display: none; }
+
+.bracelet-img {
+  width: 160px;
+  margin: 15px auto;
+  display: block;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(255,77,109,0.5);
+}
+</style>
+</head>
+
+<body>
+
+<!-- Background Music -->
+<audio autoplay loop volume="0.3">
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0e09c7bb92.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Floating Background -->
+<script>
+const colors = ["#ff4fa3","#ffcc00","#4fc3f7","#81c784","#ff7043"];
+for (let i = 0; i < 30; i++) {
+  let el = document.createElement("div");
+  el.classList.add("float");
+  el.style.left = Math.random() * 100 + "vw";
+  el.style.animationDuration = 4 + Math.random() * 5 + "s";
+
+  let r = Math.random();
+  if (r < 0.4) { el.innerHTML = "❤️"; el.classList.add("heart"); }
+  else if (r < 0.7) { el.innerHTML = "🌹"; el.classList.add("rose"); }
+  else {
+    el.classList.add("balloon");
+    el.style.background = colors[Math.floor(Math.random()*colors.length)];
+  }
+  document.body.appendChild(el);
+}
+</script>
+
+<div class="container">
+
+  <!-- INTRO -->
+  <div id="intro">
+    <h1>Hey Deepthi 💕</h1>
+    <p>
+      I made this little game just for you ✨<br>
+      Answer a few questions from our memories<br>
+      and unlock your birthday surprise 🎁
+    </p>
+    <button onclick="startQuiz()">Start</button>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz">
+    <div class="name">Happy Birthday Deepthi 💖</div>
+    <div class="question" id="questionText"></div>
+    <input type="text" id="answer" placeholder="Type your answer...">
+    <br>
+    <button onclick="checkAnswer()">Submit</button>
+    <div class="message" id="message"></div>
+  </div>
+
+  <!-- LETTERS -->
+  <div class="letters">
+    <div class="box"></div><div class="box"></div>
+    <div class="box"></div><div class="box"></div>
+    <div class="box"></div><div class="box"></div>
+    <div class="box"></div><div class="box"></div>
+  </div>
+
+  <!-- FINAL -->
+  <div id="final">
+    <h1>💖Many more Happy returns of the Day Deepthi💖</h1>
+    <h2>🎉 Surprise 🎉</h2>
+
+    <img class="bracelet-img"
+      src="https://rukminim2.flixcart.com/image/180/240/xif0q/bangle-bracelet-armlet/i/w/z/-original-imahg2z6pqs7qp3t.jpeg?q=90"
+      alt="Bracelet">
+
+    <p>Your gift is a <b>BRACELET</b> 💖</p>
+    <p>✨This is to remind you that a friend is there to share everything💖</p>
+    <p>💖Thank you for coming into my life💖</p>
+  </div>
+
+</div>
+
+<!-- Confetti -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+const data = [
+  { question: "Where did we first meet?", answers: ["college","classroom"], letters: ["B","R"] },
+  { question: "Who is my favorite person? (ammamma or amma)", answers: ["ammamma"], letters: ["A","C"] },
+  { question: "What's my favorite food?", answers: ["biryani"], letters: ["E","L"] },
+  { question: "First place we went out (not college related)?", answers: ["mall"], letters: ["E","T"] }
+];
+
+let index = 0, letterIndex = 0;
+const questionText = document.getElementById("questionText");
+const answerInput = document.getElementById("answer");
+const message = document.getElementById("message");
+const boxes = document.querySelectorAll(".box");
+
+questionText.textContent = data[0].question;
+
+function startQuiz(){
+  document.getElementById("intro").style.display = "none";
+  document.getElementById("quiz").style.display = "block";
+}
+
+function checkAnswer() {
+  const userAnswer = answerInput.value.trim().toLowerCase();
+  if (data[index].answers.includes(userAnswer)) {
+    message.style.color = "green";
+    message.textContent = "Correct 💖";
+
+    data[index].letters.forEach(letter => {
+      boxes[letterIndex].textContent = letter;
+      boxes[letterIndex].classList.add("revealed");
+      letterIndex++;
+    });
+
+    index++;
+    answerInput.value = "";
+
+    if (index < data.length) {
+      questionText.textContent = data[index].question;
+    } else {
+      document.getElementById("quiz").style.display = "none";
+document.querySelector(".letters").style.display = "none";
+document.getElementById("final").style.display = "block";
+confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 } });
+
+    }
+  } else {
+    message.style.color = "red";
+    message.textContent = "Wrong 😝 Try again!";
+  }
+}
+</script>
+
+</body>
+</html>
+
