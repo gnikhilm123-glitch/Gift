@@ -55,7 +55,7 @@ body {
   padding: 30px;
   border-radius: 20px;
   width: 90%;
-  max-width: 450px;
+  max-width: 480px;
   text-align: center;
   box-shadow: 0 15px 30px rgba(0,0,0,0.2);
   z-index: 2;
@@ -98,27 +98,26 @@ button:hover { background: #e63b5c; }
 
 .message { margin-top: 10px; font-weight: bold; }
 
-/* Letters */
-.letters {
+/* WORD BOXES */
+.words {
   display: flex;
   justify-content: center;
   margin-top: 25px;
-  gap: 8px;
+  gap: 10px;
+  flex-wrap: wrap;
 }
-.box {
-  width: 35px;
-  height: 35px;
-  border-radius: 8px;
+.word-box {
+  min-width: 90px;
+  padding: 10px;
+  border-radius: 10px;
   background: #eee;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
   font-weight: bold;
+  opacity: 0;
 }
 .revealed {
   background: #ff4d6d;
   color: white;
+  opacity: 1;
   animation: pop 0.3s ease;
 }
 @keyframes pop {
@@ -129,11 +128,11 @@ button:hover { background: #e63b5c; }
 /* Intro & Final */
 #quiz, #final { display: none; }
 
-.bracelet-img {
-  width: 160px;
-  margin: 15px auto;
+.gift-img {
+  width: 180px;
+  margin: 20px auto;
   display: block;
-  border-radius: 15px;
+  border-radius: 20px;
   box-shadow: 0 10px 25px rgba(255,77,109,0.5);
 }
 </style>
@@ -189,24 +188,25 @@ for (let i = 0; i < 30; i++) {
     <div class="message" id="message"></div>
   </div>
 
-  <!-- LETTERS -->
-  <div class="letters">
-    <div class="box"></div><div class="box"></div>
-    <div class="box"></div><div class="box"></div>
-    <div class="box"></div><div class="box"></div>
-    <div class="box"></div><div class="box"></div>
+  <!-- WORD REVEAL -->
+  <div class="words">
+    <div class="word-box"></div>
+    <div class="word-box"></div>
+    <div class="word-box"></div>
+    <div class="word-box"></div>
   </div>
 
   <!-- FINAL -->
   <div id="final">
-    <h1>💖Many more Happy returns of the Day Deepthi💖</h1>
+    <h1>💖 Many More Happy Returns of the Day Deepthi 💖</h1>
     <h2>🎉 Surprise 🎉</h2>
 
-    <img class="bracelet-img"
-      src="https://rukminim2.flixcart.com/image/180/240/xif0q/bangle-bracelet-armlet/i/w/z/-original-imahg2z6pqs7qp3t.jpeg?q=90"
-      alt="Bracelet">
+    <img class="gift-img"
+      src="https://m.media-amazon.com/images/I/51xeXibi8hL._SX522_.jpg"
+      alt="Silicon Cat Night Lamp">
 
-    <p>Your gift is a <b>BRACELET</b> 💖</p>
+    <p>Your gift is a <b>Silicon Cat Night Lamp</b> 🐱✨</p>
+    <p>💡 To light up your nights just like you light up my life</p>
     <p>✨This is to remind you that a friend is there to share everything💖</p>
     <p>💖Thank you for coming into my life💖</p>
   </div>
@@ -218,17 +218,17 @@ for (let i = 0; i < 30; i++) {
 
 <script>
 const data = [
-  { question: "Where did we first meet?", answers: ["college","classroom"], letters: ["B","R"] },
-  { question: "Who is my favorite person? (ammamma or amma)", answers: ["ammamma"], letters: ["A","C"] },
-  { question: "What's my favorite food?", answers: ["biryani"], letters: ["E","L"] },
-  { question: "First place we went out (not college related)?", answers: ["mall"], letters: ["E","T"] }
+  { question: "Where did we first meet?", answers: ["college","classroom"], word: "Silicon" },
+  { question: "Who is my favorite person? (ammamma or amma)", answers: ["ammamma"], word: "Cat" },
+  { question: "What's my favorite food?", answers: ["biryani"], word: "Night" },
+  { question: "First place we went out (not college related)?", answers: ["mall"], word: "Lamp" }
 ];
 
-let index = 0, letterIndex = 0;
+let index = 0;
 const questionText = document.getElementById("questionText");
 const answerInput = document.getElementById("answer");
 const message = document.getElementById("message");
-const boxes = document.querySelectorAll(".box");
+const wordBoxes = document.querySelectorAll(".word-box");
 
 questionText.textContent = data[0].question;
 
@@ -243,11 +243,8 @@ function checkAnswer() {
     message.style.color = "green";
     message.textContent = "Correct 💖";
 
-    data[index].letters.forEach(letter => {
-      boxes[letterIndex].textContent = letter;
-      boxes[letterIndex].classList.add("revealed");
-      letterIndex++;
-    });
+    wordBoxes[index].textContent = data[index].word;
+    wordBoxes[index].classList.add("revealed");
 
     index++;
     answerInput.value = "";
@@ -256,10 +253,9 @@ function checkAnswer() {
       questionText.textContent = data[index].question;
     } else {
       document.getElementById("quiz").style.display = "none";
-document.querySelector(".letters").style.display = "none";
-document.getElementById("final").style.display = "block";
-confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 } });
-
+      document.querySelector(".words").style.display = "none";
+      document.getElementById("final").style.display = "block";
+      confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 } });
     }
   } else {
     message.style.color = "red";
